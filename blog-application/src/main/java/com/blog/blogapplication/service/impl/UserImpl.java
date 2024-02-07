@@ -9,6 +9,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -21,9 +22,9 @@ public class UserImpl implements UserService {
 
   @Override
   public UserDto createUser(UserDto userDto) {
-    User user = this.dtoToUser(userDto);
+    User user = this.modelMapper.map(userDto, User.class);
     User savedUser = this.userRepo.save(user);
-    return this.userToDto(savedUser);
+    return this.modelMapper.map(savedUser, UserDto.class);
   }
 
   @Override
@@ -36,13 +37,13 @@ public class UserImpl implements UserService {
     user.setAbout(userDto.getAbout());
 
     User updatedUser = this.userRepo.save(user);
-    return this.userToDto(updatedUser);
+    return this.modelMapper.map(updatedUser, UserDto.class);
   }
 
   @Override
   public UserDto getUserById(Integer id) {
     User user = this.userRepo.findById(id).orElseThrow(() -> new ResourceNotFoundException("User", " id ", id));
-    return this.userToDto(user);
+    return this.modelMapper.map(user, UserDto.class);
   }
 
   @Override
@@ -54,20 +55,17 @@ public class UserImpl implements UserService {
   @Override
   public List<UserDto> getAllUsers() {
     List<User> users = this.userRepo.findAll();
-    return users.stream().map(this::userToDto).collect(Collectors.toList());
+    List<UserDto> list = new ArrayList<>();
+    for (User user : users) {
+      UserDto map = this.modelMapper.map(user, UserDto.class);
+      list.add(map);
+    }
+    return list;
     /*
-    * this::userToDto -> this means
-    * user -> this.userDto(user)
-    * we have replaced lambda expression with method reference over here
-    * */
-  }
-
-  private User dtoToUser(UserDto userDto) {
-    return this.modelMapper.map(userDto, User.class);
-  }
-
-  private UserDto userToDto(User user) {
-    return this.modelMapper.map(user, UserDto.class);
+     * this::userToDto -> this means
+     * user -> this.userDto(user)
+     * we have replaced lambda expression with method reference over here
+     * */
   }
 }
 /*
