@@ -1,2 +1,4 @@
-package com.blog.blogapplication.service.impl;public class PostImpl {
+package com.blog.blogapplication.service.impl;
+
+public class PostImpl {
 }
