@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.Date;
+
 @NoArgsConstructor
 @Getter
 @Setter
@@ -16,4 +18,12 @@ public class PostDto {
 
   @NotBlank
   private String postContent;
+
+  private String postImage;
+
+  private Date dateAdded;
+
+  private UserDto user;
+
+  private CategoryDto category;
 }
