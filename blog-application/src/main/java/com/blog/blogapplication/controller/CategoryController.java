@@ -11,44 +11,75 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+ * This class represents the controller for handling category-related operations in the blogging application.
+ */
 @RestController
 @RequestMapping("/api/categories")
 public class CategoryController {
+
+  /** The service for handling category-related operations. */
   @Autowired
   private CategoryService categoryService;
 
-  // POST - create Category
+  /**
+   * Creates a new category.
+   *
+   * @param categoryDto The DTO (Data Transfer Object) containing category information.
+   * @return ResponseEntity<CategoryDto> The response containing the created category DTO.
+   */
   @PostMapping("/")
   public ResponseEntity<CategoryDto> createCategory(@Valid @RequestBody CategoryDto categoryDto) {
-    CategoryDto categoryDto1 = this.categoryService.createCategory(categoryDto);
-    return new ResponseEntity<CategoryDto>(categoryDto1, HttpStatus.CREATED);
+    CategoryDto createdCategory = this.categoryService.createCategory(categoryDto);
+    return new ResponseEntity<>(createdCategory, HttpStatus.CREATED);
   }
 
-  // GET - get Category by id
+  /**
+   * Retrieves a category by its ID.
+   *
+   * @param categoryId The ID of the category to retrieve.
+   * @return ResponseEntity<CategoryDto> The response containing the retrieved category DTO.
+   */
   @GetMapping("/{categoryId}")
   public ResponseEntity<CategoryDto> getCategoryById(@PathVariable Integer categoryId) {
     CategoryDto category = this.categoryService.getCategoryById(categoryId);
-    return new ResponseEntity<CategoryDto>(category, HttpStatus.OK);
+    return new ResponseEntity<>(category, HttpStatus.OK);
   }
 
-  // UPDATE - update Category
+  /**
+   * Updates an existing category.
+   *
+   * @param categoryDto The DTO containing updated category information.
+   * @param categoryId  The ID of the category to update.
+   * @return ResponseEntity<CategoryDto> The response containing the updated category DTO.
+   */
   @PutMapping("/{categoryId}")
   public ResponseEntity<CategoryDto> updateCategory(@Valid @RequestBody CategoryDto categoryDto,
                                                     @PathVariable Integer categoryId) {
-    CategoryDto updatedUser = this.categoryService.updateCategory(categoryDto, categoryId);
-    return new ResponseEntity<CategoryDto>(updatedUser, HttpStatus.OK);
+    CategoryDto updatedCategory = this.categoryService.updateCategory(categoryDto, categoryId);
+    return new ResponseEntity<>(updatedCategory, HttpStatus.OK);
   }
 
-  // DELETE - delete Category
+  /**
+   * Deletes a category by its ID.
+   *
+   * @param categoryId The ID of the category to delete.
+   * @return ResponseEntity<ApiResponse> The response indicating the success of the deletion operation.
+   */
   @DeleteMapping("/{categoryId}")
   public ResponseEntity<ApiResponse> deleteCategory(@PathVariable Integer categoryId) {
     this.categoryService.deleteCategory(categoryId);
-    return new ResponseEntity<ApiResponse>(new ApiResponse("Category Deleted Successfully!!!!", true), HttpStatus.OK);
+    return new ResponseEntity<>(new ApiResponse("Category Deleted Successfully!!!!", true), HttpStatus.OK);
   }
 
-  // GET - get0 Categories
+  /**
+   * Retrieves all categories.
+   *
+   * @return ResponseEntity<List<CategoryDto>> The response containing a list of all category DTOs.
+   */
   @GetMapping("/")
   public ResponseEntity<List<CategoryDto>> getCategories() {
-    return new ResponseEntity<>(this.categoryService.getAllCategories(), HttpStatus.OK);
+    List<CategoryDto> categories = this.categoryService.getAllCategories();
+    return new ResponseEntity<>(categories, HttpStatus.OK);
   }
 }

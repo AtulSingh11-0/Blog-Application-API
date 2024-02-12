@@ -1,27 +1,49 @@
 package com.blog.blogapplication.service;
 
 import com.blog.blogapplication.payload.UserDto;
-
 import java.util.List;
 
+/**
+ * This interface defines the contract for user-related operations.
+ */
 public interface UserService {
-//  create
+
+  /**
+   * Creates a new user.
+   *
+   * @param userDto The DTO containing user information.
+   * @return UserDto The DTO of the created user.
+   */
   UserDto createUser(UserDto userDto);
 
-//  update
+  /**
+   * Updates an existing user.
+   *
+   * @param userDto The DTO containing updated user information.
+   * @param id      The ID of the user to update.
+   * @return UserDto The DTO of the updated user.
+   */
   UserDto updateUser(UserDto userDto, Integer id);
 
-//  get by ID
+  /**
+   * Retrieves a user by their ID.
+   *
+   * @param id The ID of the user to retrieve.
+   * @return UserDto The DTO of the retrieved user.
+   */
   UserDto getUserById(Integer id);
 
-//  delete
+  /**
+   * Deletes a user by their ID.
+   *
+   * @param id The ID of the user to delete.
+   */
   void deleteUser(Integer id);
 
-//  get all
+  /**
+   * Retrieves all users.
+   *
+   * @return List<UserDto> A list containing DTOs of all users.
+   */
   List<UserDto> getAllUsers();
 }
-
-/*
-* UserService interface which contains the method that we would require to create, update, delete, getById and getAll
-*  users
-* */

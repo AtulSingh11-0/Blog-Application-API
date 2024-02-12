@@ -11,12 +11,18 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
+/**
+ * This class implements the UserService interface to provide functionality for managing users in the blogging application.
+ */
 @Service
 public class UserImpl implements UserService {
+
+  /** The repository for accessing user data. */
   @Autowired
   private UserRepo userRepo;
+
+  /** The ModelMapper for mapping between entities and DTOs. */
   @Autowired
   private ModelMapper modelMapper;
 
@@ -68,6 +74,3 @@ public class UserImpl implements UserService {
      * */
   }
 }
-/*
-* The methods of the Services interface are implemented by this Class
-* */
