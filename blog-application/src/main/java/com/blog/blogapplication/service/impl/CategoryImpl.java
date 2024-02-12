@@ -12,10 +12,17 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * This class implements the CategoryService interface to provide functionality for managing categories in the blogging application.
+ */
 @Service
 public class CategoryImpl implements CategoryService {
+
+  /** The repository for accessing category data. */
   @Autowired
   private CategoryRepo categoryRepo;
+
+  /** The ModelMapper for mapping between entities and DTOs. */
   @Autowired
   private ModelMapper modelMapper;
 
@@ -28,15 +35,13 @@ public class CategoryImpl implements CategoryService {
 
   @Override
   public CategoryDto getCategoryById(Integer id) {
-    Category category = this.categoryRepo.findById(id).orElseThrow( () -> new ResourceNotFoundException("Category",
-        "Category id", id));
+    Category category = this.categoryRepo.findById(id).orElseThrow(() -> new ResourceNotFoundException("Category", "Category id", id));
     return this.modelMapper.map(category, CategoryDto.class);
   }
 
   @Override
   public CategoryDto updateCategory(CategoryDto categoryDto, Integer id) {
-    Category category = this.categoryRepo.findById(id).orElseThrow( () -> new ResourceNotFoundException("Category",
-        "Category id", id));
+    Category category = this.categoryRepo.findById(id).orElseThrow(() -> new ResourceNotFoundException("Category", "Category id", id));
     category.setCategoryTitle(categoryDto.getCategoryTitle());
     category.setCategoryDescription(categoryDto.getCategoryDescription());
 
@@ -46,8 +51,7 @@ public class CategoryImpl implements CategoryService {
 
   @Override
   public void deleteCategory(Integer id) {
-    Category category = this.categoryRepo.findById(id).orElseThrow( () -> new ResourceNotFoundException("Category",
-        "Category id", id));
+    Category category = this.categoryRepo.findById(id).orElseThrow(() -> new ResourceNotFoundException("Category", "Category id", id));
     this.categoryRepo.delete(category);
   }
 
@@ -55,10 +59,14 @@ public class CategoryImpl implements CategoryService {
   public List<CategoryDto> getAllCategories() {
     List<Category> categories = this.categoryRepo.findAll();
     return categories.stream().map(this::apply).collect(Collectors.toList());
-   }
-   /*
-   * this method maps the category object to an object of CategoryDto type
-   * */
+  }
+
+  /**
+   * Maps a Category entity to a CategoryDto.
+   *
+   * @param category The Category entity to map.
+   * @return CategoryDto The mapped CategoryDto.
+   */
   private CategoryDto apply(Category category) {
     return this.modelMapper.map(category, CategoryDto.class);
   }
