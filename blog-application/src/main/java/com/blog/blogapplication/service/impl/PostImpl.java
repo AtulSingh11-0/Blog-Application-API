@@ -13,6 +13,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -69,31 +70,60 @@ public class PostImpl implements PostService {
 
   @Override
   public PostDto updatePost(PostDto postDto, Integer postId) {
-    return null;
+    Post post = this.postRepo.findById(postId).orElseThrow( () -> new ResourceNotFoundException("Post", "Post id",
+        postId));
+    post.setPostTitle(postDto.getPostTitle());
+    post.setPostContent(postDto.getPostContent());
+    post.setPostImage(postDto.getPostImage());
+
+    Post updatedPost = this.postRepo.save(post);
+    return this.modelMapper.map(updatedPost, PostDto.class);
   }
 
   @Override
   public void deletePost(Integer postId) {
+    Post post = this.postRepo.findById(postId).orElseThrow( () -> new ResourceNotFoundException("Post", "Post id", postId));
+    this.postRepo.delete(post);
   }
 
   @Override
   public PostDto getPostById(Integer postId) {
-    return null;
+    Post post = this.postRepo.findById(postId).orElseThrow( () -> new ResourceNotFoundException("Post", "Post id", postId));
+    return this.modelMapper.map(post, PostDto.class);
   }
 
   @Override
   public List<PostDto> getAllPosts() {
-    return null;
+    List<Post> posts = this.postRepo.findAll();
+    List<PostDto> postDtos = new ArrayList<>();
+    for(Post post : posts) {
+      postDtos.add(this.modelMapper.map(post, PostDto.class));
+    }
+    return postDtos;
   }
 
   @Override
   public List<PostDto> getPostsByUser(Integer userId) {
-    return null;
+    User user = this.userRepo.findById(userId).orElseThrow( () -> new ResourceNotFoundException("User", "User id", userId));
+    List<Post> posts = this.postRepo.getByUser(user);
+    List<PostDto> postDtos = new ArrayList<>();
+    for(Post post : posts) {
+      postDtos.add(this.modelMapper.map(post, PostDto.class));
+    }
+    return postDtos;
   }
 
   @Override
   public List<PostDto> getPostsByCategory(Integer categoryId) {
-    return null;
+    Category category = this.categoryRepo.findById(categoryId).orElseThrow( () -> new ResourceNotFoundException(
+        "Category", "Category id", categoryId));
+
+    List<Post> posts = this.postRepo.getByCategory(category);
+    List<PostDto> postDtos = new ArrayList<>();
+    for(Post post : posts) {
+      postDtos.add(this.modelMapper.map(post, PostDto.class));
+    }
+    return postDtos;
   }
 
   @Override
