@@ -28,4 +28,12 @@ public interface PostRepo extends JpaRepository<Post, Integer> {
    * @return List<Post> The list of posts belonging to the specified category.
    */
   List<Post> getByCategory(Category category);
+
+  /**
+   * Searches for posts containing the specified keyword in their titles.
+   *
+   * @param keyword The keyword to search for in post titles.
+   * @return List<Post> The list of posts containing the specified keyword in their titles.
+   */
+  List<Post> findByPostTitleContaining(String keyword);
 }

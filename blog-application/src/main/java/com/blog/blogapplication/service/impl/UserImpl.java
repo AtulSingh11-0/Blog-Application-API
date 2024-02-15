@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * This class implements the UserService interface to provide functionality for managing users in the blogging application.
+ * Implementation of the {@link UserService} interface providing methods to manage users in the blogging application.
  */
 @Service
 public class UserImpl implements UserService {
@@ -26,6 +26,12 @@ public class UserImpl implements UserService {
   @Autowired
   private ModelMapper modelMapper;
 
+  /**
+   * Creates a new user.
+   *
+   * @param userDto The DTO containing user information.
+   * @return UserDto The DTO representing the created user.
+   */
   @Override
   public UserDto createUser(UserDto userDto) {
     User user = this.modelMapper.map(userDto, User.class);
@@ -33,6 +39,14 @@ public class UserImpl implements UserService {
     return this.modelMapper.map(savedUser, UserDto.class);
   }
 
+  /**
+   * Updates an existing user.
+   *
+   * @param userDto The DTO containing updated user information.
+   * @param id      The ID of the user to update.
+   * @return UserDto The DTO representing the updated user.
+   * @throws ResourceNotFoundException If the user is not found.
+   */
   @Override
   public UserDto updateUser(UserDto userDto, Integer id) {
     User user = this.userRepo.findById(id).orElseThrow(() -> new ResourceNotFoundException("User", " id ", id));
@@ -46,18 +60,36 @@ public class UserImpl implements UserService {
     return this.modelMapper.map(updatedUser, UserDto.class);
   }
 
+  /**
+   * Retrieves a user by their ID.
+   *
+   * @param id The ID of the user to retrieve.
+   * @return UserDto The DTO representing the retrieved user.
+   * @throws ResourceNotFoundException If the user is not found.
+   */
   @Override
   public UserDto getUserById(Integer id) {
     User user = this.userRepo.findById(id).orElseThrow(() -> new ResourceNotFoundException("User", " id ", id));
     return this.modelMapper.map(user, UserDto.class);
   }
 
+  /**
+   * Deletes a user by their ID.
+   *
+   * @param id The ID of the user to delete.
+   * @throws ResourceNotFoundException If the user is not found.
+   */
   @Override
   public void deleteUser(Integer id) {
     User user = this.userRepo.findById(id).orElseThrow(() -> new ResourceNotFoundException("User", " id ", id));
     this.userRepo.delete(user);
   }
 
+  /**
+   * Retrieves all users.
+   *
+   * @return List<UserDto> The list of all users.
+   */
   @Override
   public List<UserDto> getAllUsers() {
     List<User> users = this.userRepo.findAll();
