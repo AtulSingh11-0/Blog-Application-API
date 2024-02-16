@@ -163,7 +163,7 @@ public class PostController {
    * @return ResponseEntity<PostDto> The response containing the updated post DTO with the image.
    * @throws IOException if an I/O error occurs.
    */
-  @PostMapping("/posts/{postId}/")
+  @PostMapping("/posts/{postId}")
   public ResponseEntity<PostDto> uploadImage(
       @RequestParam("image")MultipartFile file,
       @PathVariable Integer postId
