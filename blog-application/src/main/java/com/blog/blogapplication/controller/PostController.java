@@ -4,13 +4,21 @@ import com.blog.blogapplication.config.AppConstants;
 import com.blog.blogapplication.payload.ApiResponse;
 import com.blog.blogapplication.payload.PostDto;
 import com.blog.blogapplication.payload.PostResponse;
+import com.blog.blogapplication.service.FileService;
 import com.blog.blogapplication.service.PostService;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.StreamUtils;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 
 
@@ -27,10 +35,21 @@ public class PostController {
   @Autowired
   private PostService postService;
 
+  /** The service for handling file-related operations. */
+  @Autowired
+  private FileService fileService;
+
+  /**
+   * The path where images are stored in the project.
+   * This value is injected from the application properties file using the @Value annotation.
+   */
+  @Value("${project.image}")
+  private String path;
+
   /**
    * Creates a new post for a specific user and category.
    *
-   * @param postDto     The DTO containing post information.
+   * @param postDto     The DTO containing post-information.
    * @param userId      The ID of the user associated with the post.
    * @param categoryId  The ID of the category associated with the post.
    * @return ResponseEntity<PostDto> The response containing the created post DTO.
@@ -38,7 +57,7 @@ public class PostController {
   @PostMapping("/user/{userId}/category/{categoryId}/posts")
   public ResponseEntity<PostDto> createPost(@Valid @RequestBody PostDto postDto,
                                             @PathVariable Integer userId,
-                                            @PathVariable Integer categoryId) {
+                                            @PathVariable Integer categoryId) throws IOException {
     PostDto createdPost = this.postService.createPost(postDto, userId, categoryId);
     return new ResponseEntity<>(createdPost, HttpStatus.CREATED);
   }
@@ -46,7 +65,7 @@ public class PostController {
   /**
    * Updates an existing post.
    *
-   * @param postDto  The DTO containing updated post information.
+   * @param postDto  The DTO containing updated post-information.
    * @param postId   The ID of the post to update.
    * @return ResponseEntity<PostDto> The response containing the updated post DTO.
    */
@@ -134,5 +153,44 @@ public class PostController {
   public ResponseEntity<List<PostDto>> searchPosts(@Valid @PathVariable String keyword) {
     List<PostDto> result = this.postService.searchPosts(keyword);
     return new ResponseEntity<>(result, HttpStatus.OK);
+  }
+
+  /**
+   * Handles the uploading of images for a specific post.
+   *
+   * @param file    The multipart file representing the image to upload.
+   * @param postId  The ID of the post to which the image is uploaded.
+   * @return ResponseEntity<PostDto> The response containing the updated post DTO with the image.
+   * @throws IOException if an I/O error occurs.
+   */
+  @PostMapping("/posts/{postId}/")
+  public ResponseEntity<PostDto> uploadImage(
+      @RequestParam("image")MultipartFile file,
+      @PathVariable Integer postId
+  ) throws IOException {
+    PostDto postDto = this.postService.getPostById(postId);
+    String fileName = this.fileService.uploadImage(path, file);
+    postDto.setPostImage(fileName);
+    PostDto updatedPost = this.postService.updatePost(postDto, postId);
+    return new ResponseEntity<>(updatedPost, HttpStatus.OK);
+  }
+
+  /**
+   * Handles the retrieval of images for a specific post.
+   *
+   * @param postId   The ID of the post from which the image is retrieved.
+   * @param imageName The name of the image file.
+   * @param response The HttpServletResponse object to write the image to.
+   * @throws IOException if an I/O error occurs.
+   */
+  @GetMapping(value = "/posts/{postId}/{imageName}", produces = MediaType.IMAGE_JPEG_VALUE)
+  public void getImage(
+      @PathVariable Integer postId,
+      @PathVariable String imageName,
+      HttpServletResponse response
+  ) throws IOException {
+    InputStream asset = this.fileService.getResource(path, imageName);
+    response.setContentType(MediaType.IMAGE_JPEG_VALUE);
+    StreamUtils.copy(asset, response.getOutputStream());
   }
 }

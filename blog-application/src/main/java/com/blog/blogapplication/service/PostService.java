@@ -3,6 +3,7 @@ package com.blog.blogapplication.service;
 import com.blog.blogapplication.payload.PostDto;
 import com.blog.blogapplication.payload.PostResponse;
 
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -17,8 +18,9 @@ public interface PostService {
    * @param userId      The ID of the user associated with the post.
    * @param categoryId  The ID of the category associated with the post.
    * @return PostDto    The DTO representing the created post.
+   * @throws IOException if an I/O error occurs.
    */
-  PostDto createPost(PostDto postDto, Integer userId, Integer categoryId);
+  PostDto createPost(PostDto postDto, Integer userId, Integer categoryId) throws IOException;
 
   /**
    * Updates an existing post.

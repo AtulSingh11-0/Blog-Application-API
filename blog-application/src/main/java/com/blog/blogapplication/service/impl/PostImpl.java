@@ -17,6 +17,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -41,14 +43,15 @@ public class PostImpl implements PostService {
   /**
    * Creates a new post.
    *
-   * @param postDto     The post data transfer object containing the post information.
+   * @param postDto     The post-data transfer object containing the post-information.
    * @param userId      The ID of the user associated with the post.
    * @param categoryId  The ID of the category associated with the post.
    * @return PostDto    The DTO representing the created post.
    * @throws ResourceNotFoundException If the user or category is not found.
+   * @throws IOException               If an I/O error occurs while processing the request.
    */
   @Override
-  public PostDto createPost(PostDto postDto, Integer userId, Integer categoryId) {
+  public PostDto createPost(PostDto postDto, Integer userId, Integer categoryId) throws IOException {
     User user = this.userRepo.findById(userId).orElseThrow(() -> new ResourceNotFoundException("User", "User id", userId));
     Category category = this.categoryRepo.findById(categoryId).orElseThrow(() -> new ResourceNotFoundException("Category",
         "Category id", categoryId));
@@ -60,7 +63,6 @@ public class PostImpl implements PostService {
     post.setCategory(category);
 
     Post savedPost = this.postRepo.save(post);
-
     return this.modelMapper.map(savedPost, PostDto.class);
   }
 
