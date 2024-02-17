@@ -54,7 +54,7 @@ public class PostController {
    * @param categoryId  The ID of the category associated with the post.
    * @return ResponseEntity<PostDto> The response containing the created post DTO.
    */
-  @PostMapping("/user/{userId}/category/{categoryId}/posts")
+  @PostMapping("/users/{userId}/categories/{categoryId}/posts")
   public ResponseEntity<PostDto> createPost(@Valid @RequestBody PostDto postDto,
                                             @PathVariable Integer userId,
                                             @PathVariable Integer categoryId) throws IOException {
@@ -125,7 +125,7 @@ public class PostController {
    * @param userId  The ID of the user whose posts are to be retrieved.
    * @return ResponseEntity<List<PostDto>> The response containing the list of user's posts.
    */
-  @GetMapping("/user/{userId}/posts")
+  @GetMapping("/users/{userId}/posts")
   public ResponseEntity<List<PostDto>> getPostsByUser(@Valid @PathVariable Integer userId) {
     List<PostDto> posts = this.postService.getPostsByUser(userId);
     return new ResponseEntity<>(posts, HttpStatus.OK);
@@ -137,7 +137,7 @@ public class PostController {
    * @param categoryId  The ID of the category whose posts are to be retrieved.
    * @return ResponseEntity<List<PostDto>> The response containing the list of category's posts.
    */
-  @GetMapping("/category/{categoryId}/posts")
+  @GetMapping("/categories/{categoryId}/posts")
   public ResponseEntity<List<PostDto>> getPostsByCategory(@Valid @PathVariable Integer categoryId) {
     List<PostDto> posts = this.postService.getPostsByCategory(categoryId);
     return new ResponseEntity<>(posts, HttpStatus.OK);
