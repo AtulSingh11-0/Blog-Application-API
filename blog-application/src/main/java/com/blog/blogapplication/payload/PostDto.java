@@ -6,6 +6,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * This class represents a Data Transfer Object (DTO) for a blog post.
@@ -38,4 +40,6 @@ public class PostDto {
 
   /** The DTO representing the category to which the post belongs. */
   private CategoryDto category;
+
+  private Set<CommentDto> comments = new HashSet<>();
 }

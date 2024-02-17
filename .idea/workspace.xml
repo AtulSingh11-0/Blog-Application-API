@@ -5,10 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f991e6d6-36da-407b-9082-f014893fc35e" name="Changes" comment="added javaDocs to User-API and exceptions">
-      <change afterPath="$PROJECT_DIR$/blog-application/src/main/java/com/blog/blogapplication/model/Comment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/blog-application/src/main/java/com/blog/blogapplication/controller/PostController.java" beforeDir="false" afterPath="$PROJECT_DIR$/blog-application/src/main/java/com/blog/blogapplication/controller/PostController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/blog-application/src/main/java/com/blog/blogapplication/controller/CommentController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/blog-application/src/main/java/com/blog/blogapplication/payload/CommentDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/blog-application/src/main/java/com/blog/blogapplication/repo/CommentRepo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/blog-application/src/main/java/com/blog/blogapplication/service/CommentService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/blog-application/src/main/java/com/blog/blogapplication/service/impl/CommentImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog-application/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/blog-application/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog-application/src/main/java/com/blog/blogapplication/model/Comment.java" beforeDir="false" afterPath="$PROJECT_DIR$/blog-application/src/main/java/com/blog/blogapplication/model/Comment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog-application/src/main/java/com/blog/blogapplication/model/Post.java" beforeDir="false" afterPath="$PROJECT_DIR$/blog-application/src/main/java/com/blog/blogapplication/model/Post.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/blog-application/src/main/java/com/blog/blogapplication/model/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/blog-application/src/main/java/com/blog/blogapplication/model/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog-application/src/main/java/com/blog/blogapplication/payload/PostDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/blog-application/src/main/java/com/blog/blogapplication/payload/PostDto.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,6 +38,7 @@
     <branch-grouping />
     <option name="PUSH_AUTO_UPDATE" value="true" />
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="UPDATE_TYPE" value="REBASE" />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
   &quot;lastFilter&quot;: {
@@ -161,6 +170,9 @@
       <workItem from="1708187317545" duration="847000" />
       <workItem from="1708188188376" duration="64000" />
       <workItem from="1708188269605" duration="215000" />
+      <workItem from="1708188508177" duration="204000" />
+      <workItem from="1708188736306" duration="131000" />
+      <workItem from="1708189001146" duration="8087000" />
     </task>
     <task id="LOCAL-00001" summary="updated vsc.xml">
       <option name="closed" value="true" />
@@ -237,6 +249,16 @@
     <MESSAGE value="Add VS Code settings and project files" />
     <MESSAGE value="added javaDocs to User-API and exceptions" />
     <option name="LAST_COMMIT_MESSAGE" value="added javaDocs to User-API and exceptions" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="java.sql.SQLIntegrityConstraintViolationException" package="java.sql" />
+          <option name="timeStamp" value="1" />
+        </breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

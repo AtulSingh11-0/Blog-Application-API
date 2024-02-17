@@ -1,0 +1,14 @@
+{
+  "configurations": [
+    {
+      "type": "java",
+      "name": "Spring Boot-BlogApplicationApiApplication<blog-application>",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "mainClass": "com.blog.blogapplication.BlogApplicationApiApplication",
+      "projectName": "blog-application",
+      "args": "",
+      "envFile": "${workspaceFolder}/.env"
+    }
+  ]
+}
