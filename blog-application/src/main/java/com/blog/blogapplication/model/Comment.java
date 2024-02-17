@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.Date;
+
 @Entity
 @Getter
 @Setter
@@ -19,9 +21,12 @@ public class Comment {
   @Column(name = "commentBody", length = 10000, nullable = false)
   private String commentBody;
 
-  @ManyToOne
-  private User user;
+  private Date dateAdded;
+
+//  @ManyToOne
+//  private User user;
 
   @ManyToOne
+  @JoinColumn(name = "post_id")
   private Post post;
 }
