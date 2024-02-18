@@ -3,9 +3,11 @@ package com.blog.blogapplication.service.impl;
 import com.blog.blogapplication.exception.ResourceNotFoundException;
 import com.blog.blogapplication.model.Comment;
 import com.blog.blogapplication.model.Post;
+import com.blog.blogapplication.model.User;
 import com.blog.blogapplication.payload.CommentDto;
 import com.blog.blogapplication.repo.CommentRepo;
 import com.blog.blogapplication.repo.PostRepo;
+import com.blog.blogapplication.repo.UserRepo;
 import com.blog.blogapplication.service.CommentService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,15 +22,20 @@ public class CommentImpl implements CommentService {
   private CommentRepo commentRepo;
 
   @Autowired
+  private UserRepo userRepo;
+
+  @Autowired
   private PostRepo postRepo;
 
   @Autowired
   private ModelMapper modelMapper;
   @Override
-  public CommentDto createComment(CommentDto commentDto, Integer postId) {
+  public CommentDto createComment(CommentDto commentDto, Integer userId, Integer postId) {
+    User user = this.userRepo.findById(userId).orElseThrow( () -> new ResourceNotFoundException("User", "user id", userId));
     Post post = this.postRepo.findById(postId).orElseThrow( () -> new ResourceNotFoundException("Post", "post id", postId));
 
     Comment comment = this.modelMapper.map(commentDto, Comment.class);
+    comment.setUser(user);
     comment.setPost(post);
     comment.setDateAdded(new Date());
 

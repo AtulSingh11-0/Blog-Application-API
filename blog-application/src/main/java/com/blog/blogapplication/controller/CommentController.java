@@ -10,18 +10,19 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/")
+@RequestMapping("/api/v1/")
 public class CommentController {
 
   @Autowired
   private CommentService commentService;
 
-  @PostMapping("/posts/{postId}/comment")
+  @PostMapping("users/{userId}/posts/{postId}/comment")
   public ResponseEntity<CommentDto> createComment(
       @Valid @RequestBody CommentDto commentDto,
+      @PathVariable Integer userId,
       @PathVariable Integer postId
   ) {
-    CommentDto comment = this.commentService.createComment(commentDto, postId);
+    CommentDto comment = this.commentService.createComment(commentDto, userId, postId);
     return new ResponseEntity<>(comment, HttpStatus.CREATED);
   }
 

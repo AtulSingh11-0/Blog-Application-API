@@ -15,7 +15,7 @@ import java.util.List;
  * This class represents the controller for handling category-related operations in the blogging application.
  */
 @RestController
-@RequestMapping("/api/categories")
+@RequestMapping("/api/v1/categories")
 public class CategoryController {
 
   /** The service for handling category-related operations. */

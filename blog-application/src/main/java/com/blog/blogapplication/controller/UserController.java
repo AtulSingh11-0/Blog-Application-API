@@ -15,7 +15,7 @@ import java.util.List;
  * This class represents the controller for handling user-related operations in the blogging application.
  */
 @RestController
-@RequestMapping("/api/users")
+@RequestMapping("/api/v1/users")
 public class UserController {
 
   /** The service for handling user-related operations. */

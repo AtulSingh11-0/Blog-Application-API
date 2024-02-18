@@ -23,8 +23,8 @@ public class Comment {
 
   private Date dateAdded;
 
-//  @ManyToOne
-//  private User user;
+  @ManyToOne
+  private User user;
 
   @ManyToOne
   @JoinColumn(name = "post_id")

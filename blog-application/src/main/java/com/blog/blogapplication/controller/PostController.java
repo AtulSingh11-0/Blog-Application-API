@@ -28,7 +28,7 @@ import java.util.List;
  * based on different criteria such as user, category, or keyword.
  */
 @RestController
-@RequestMapping("/api/")
+@RequestMapping("/api/v1/")
 public class PostController {
 
   /** The service for handling post-related operations. */
@@ -109,7 +109,7 @@ public class PostController {
    * @param order       The sorting order (default is provided).
    * @return ResponseEntity<PostResponse> The response containing the paginated and sorted list of posts.
    */
-  @GetMapping("/posts")
+  @GetMapping("/posts/")
   public ResponseEntity<PostResponse> getAllPosts(
       @RequestParam(value = "pageNumber", defaultValue = AppConstants.PAGE_NUMBER, required = false) Integer pageNumber,
       @RequestParam(value = "pageSize", defaultValue = AppConstants.PAGE_SIZE, required = false) Integer pageSize,

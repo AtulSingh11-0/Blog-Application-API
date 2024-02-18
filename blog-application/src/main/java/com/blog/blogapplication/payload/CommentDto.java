@@ -12,9 +12,9 @@ import java.util.Date;
 @NoArgsConstructor
 public class CommentDto {
 
-//  private PostDto post;
-
   private Integer commentId;
+
+  private String userName;
 
   @NotBlank
   private String commentBody;
