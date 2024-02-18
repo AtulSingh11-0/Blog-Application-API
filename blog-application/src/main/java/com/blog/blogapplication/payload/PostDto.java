@@ -41,5 +41,6 @@ public class PostDto {
   /** The DTO representing the category to which the post belongs. */
   private CategoryDto category;
 
+  /** The set of comments associated with the post. */
   private Set<CommentDto> comments = new HashSet<>();
 }
