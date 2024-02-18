@@ -4,11 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f991e6d6-36da-407b-9082-f014893fc35e" name="Changes" comment="added javaDocs to User-API and exceptions">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/blog-application/src/main/java/com/blog/blogapplication/payload/CommentDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/blog-application/src/main/java/com/blog/blogapplication/payload/CommentDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/blog-application/src/main/java/com/blog/blogapplication/payload/PostDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/blog-application/src/main/java/com/blog/blogapplication/payload/PostDto.java" afterDir="false" />
-    </list>
+    <list default="true" id="f991e6d6-36da-407b-9082-f014893fc35e" name="Changes" comment="added javaDocs to User-API and exceptions" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -165,7 +161,7 @@
       <workItem from="1708188736306" duration="131000" />
       <workItem from="1708189001146" duration="8087000" />
       <workItem from="1708245057924" duration="9853000" />
-      <workItem from="1708256689408" duration="931000" />
+      <workItem from="1708256689408" duration="1249000" />
     </task>
     <task id="LOCAL-00001" summary="updated vsc.xml">
       <option name="closed" value="true" />
