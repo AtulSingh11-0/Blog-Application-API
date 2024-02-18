@@ -6,7 +6,9 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * This class represents a user in the blogging application.
@@ -40,6 +42,9 @@ public class User {
   @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
   private List<Post> posts = new ArrayList<>();
 
-//  @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-//  private Set<Comment> comments = new HashSet<>();
+  /**
+   * Set of comments authored by this user.
+   */
+  @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+  private Set<Comment> comments = new HashSet<>();
 }

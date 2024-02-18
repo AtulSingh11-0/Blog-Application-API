@@ -48,6 +48,9 @@ public class Post {
   @JoinColumn(name = "category_id")
   private Category category;
 
+  /**
+   * Set of comments associated with this post.
+   */
   @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
   private Set<Comment> comments = new HashSet<>();;
 }
