@@ -16,4 +16,6 @@ public class AppConstants {
 
   /** Default sorting order for pagination. */
   public static final String ORDER = "ascending";
+
+  public static final long JWT_TOKEN_VALIDITY = 5 * 60 * 60;
 }
